@@ -173,6 +173,21 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--cream);color:va
 .book-isbn{font-size:.72rem;color:#9CA3AF;margin-bottom:8px;}
 .book-features{list-style:none;font-size:.78rem;color:var(--muted);line-height:2;}
 .book-features li::before{content:'✓ ';color:var(--royal);font-weight:700;}
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 30px; border-radius: 50px;
+  font-family: 'Baloo 2', cursive;
+  font-size: 1rem; font-weight: 800;
+  text-decoration: none; cursor: pointer; border: none;
+  transition: all 0.25s; letter-spacing: 0.3px;
+}
+.btn-gold {
+  background: linear-gradient(135deg, #FFD600, #FF8F00);
+  color: #0A2A6B;
+  box-shadow: 0 8px 28px rgba(255,214,0,0.45);
+}
+.btn-gold:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(255,214,0,0.6); }
+
 
 /* ─── YEAR CURRICULUM ─── */
 .year-row{display:flex;gap:0;margin-top:20px;overflow-x:auto;}
@@ -632,6 +647,9 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--cream);color:va
           <span class="book-lang bl-ms">🇲🇾 Bahasa Melayu</span>
           <div class="book-title">EGK Pengembaraan AI</div>
           <div class="book-isbn">eISBN: 978-629-94581-4-2</div>
+          <a href="https://anyflip.com/schwm/lntn/" class="btn btn-gold" style="font-size:0.88rem;padding:10px 22px">Preview📚</a>
+          <a href="https://apps.apple.com/my/app/egk-bookstore/id6758967869" class="btn btn-gold" style="font-size:0.88rem;padding:10px 22px">EGK BookStore 🛒</a>
+          <a href="https://buy.stripe.com/4gM9AS0Rb7hbdj93IN6Zy04" class="btn btn-gold" style="font-size:0.88rem;padding:10px 22px">Order Now 🛒📚</a>
           <ul class="book-features">
             <li>Bahasa Melayu — sesuai untuk semua sekolah kebangsaan</li>
             <li>Aplikasi AR percuma EGK AIAdv AR disertakan</li>
@@ -651,6 +669,10 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--cream);color:va
           <span class="book-lang bl-en">🇬🇧 English</span>
           <div class="book-title">EGK AI Adventure</div>
           <div class="book-isbn">eISBN: 978-629-94581-5-9</div>
+          <a href="https://anyflip.com/yerpd/dijp/" class="btn btn-gold" style="font-size:0.88rem;padding:10px 22px">Preview📚</a>
+          <a href="https://apps.apple.com/my/app/egk-bookstore/id6758967869" class="btn btn-gold" style="font-size:0.88rem;padding:10px 22px">EGK BookStore 🛒</a>
+          <a href="https://buy.stripe.com/8x200igQ91WRend3IN6Zy05" class="btn btn-gold" style="font-size:0.88rem;padding:10px 22px">Order Now 🛒📚</a>
+
           <ul class="book-features">
             <li>English edition — for national-type and international schools</li>
             <li>Free AR app EGK AIAdv AR included</li>
@@ -673,6 +695,9 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--cream);color:va
             <span class="book-lang bl-zh">🀄 中文版</span>
             <div class="book-title">人工智能探险 · EGK AI 探险之旅</div>
             <div class="book-isbn">eISBN: 978-629-94581-8-0</div>
+            <a href="https://anyflip.com/yerpd/nlae/" class="btn btn-gold" style="font-size:0.88rem;padding:10px 22px">Preview📚</a>
+            <a href="https://apps.apple.com/my/app/egk-bookstore/id6758967869" class="btn btn-gold" style="font-size:0.88rem;padding:10px 22px">EGK BookStore 🛒</a>
+            <a href="https://buy.stripe.com/eVqdR857rcBv4MD4MR6Zy06" class="btn btn-gold" style="font-size:0.88rem;padding:10px 22px">Order Now 🛒📚</a>
             <ul class="book-features">
               <li>Edisi Mandarin — sesuai untuk sekolah jenis kebangsaan Cina (SJKC)</li>
               <li>Aplikasi AR percuma EGK AIAdv AR disertakan</li>
