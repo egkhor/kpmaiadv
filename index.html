@@ -1,355 +1,843 @@
 <!DOCTYPE html>
 
-<html lang="ms">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portal EGK × KPM — Telah Dipindahkan</title>
-<meta http-equiv="refresh" content="12;url=https://egkhor.com.my/gov/kpm">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<title>EGK Natural AI Cooling System — Malaysia</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --navy:#0A1F5C;
-  --royal:#1042B0;
-  --gold:#D4A017;
-  --gold-dim:rgba(212,160,23,.18);
-  --white:#FFFFFF;
-}
-*{margin:0;padding:0;box-sizing:border-box;}
-html,body{height:100%;font-family:'Plus Jakarta Sans',sans-serif;overflow:hidden;}
+  :root {
+    --jungle: #1a3a1a;
+    --leaf: #2d7a2d;
+    --moss: #4caf50;
+    --lime: #8bc34a;
+    --water: #00bcd4;
+    --deep: #006064;
+    --sky: #b2ebf2;
+    --gold: #ffd600;
+    --amber: #ff8f00;
+    --red: #e53935;
+    --dark: #0a1a0a;
+    --panel: rgba(10,30,10,0.85);
+    --glow: #39ff14;
+  }
 
-/* ── BACKGROUND ── */
-body{
-background:#060D1C;
-display:flex;flex-direction:column;align-items:center;justify-content:center;
-min-height:100vh;position:relative;
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+background: var(–dark);
+font-family: ‘Rajdhani’, sans-serif;
+color: #e0ffe0;
+min-height: 100vh;
+overflow-x: hidden;
 }
 
-/* Layered radial atmosphere */
-body::before{
-content:’’;position:fixed;inset:0;pointer-events:none;
+/* === ANIMATED BG === */
+.bg-layer {
+position: fixed; inset: 0; z-index: 0;
 background:
-radial-gradient(ellipse 80% 60% at 15% 50%, rgba(10,31,92,.55) 0%, transparent 65%),
-radial-gradient(ellipse 60% 50% at 85% 30%, rgba(16,66,176,.25) 0%, transparent 60%),
-radial-gradient(ellipse 40% 40% at 50% 100%, rgba(212,160,23,.06) 0%, transparent 60%);
+radial-gradient(ellipse 80% 60% at 20% 80%, rgba(45,122,45,0.18) 0%, transparent 60%),
+radial-gradient(ellipse 60% 80% at 80% 20%, rgba(0,188,212,0.12) 0%, transparent 60%),
+radial-gradient(ellipse 100% 100% at 50% 50%, #0a1a0a 0%, #020802 100%);
+animation: bgPulse 8s ease-in-out infinite alternate;
+}
+@keyframes bgPulse {
+from { opacity: 1; }
+to { filter: brightness(1.15); }
 }
 
-/* Fine grid */
-body::after{
-content:’’;position:fixed;inset:0;pointer-events:none;
-background-image:
-linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
-linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
-background-size:56px 56px;
+/* Rain drops */
+.rain { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+.drop {
+position: absolute; width: 1px; background: linear-gradient(transparent, rgba(0,188,212,0.4));
+animation: fall linear infinite;
+}
+@keyframes fall { from { transform: translateY(-100px); opacity: 0; } 30% { opacity: 1; } to { transform: translateY(110vh); opacity: 0; } }
+
+.wrapper {
+position: relative; z-index: 2;
+max-width: 1100px; margin: 0 auto;
+padding: 32px 20px 60px;
 }
 
-/* ── STARS ── */
-.stars{position:fixed;inset:0;pointer-events:none;z-index:0;}
-.star{
-position:absolute;border-radius:50%;background:#fff;
-animation:twinkle var(–d,3s) ease-in-out infinite var(–dl,0s);
-}
-@keyframes twinkle{0%,100%{opacity:.1;transform:scale(1);}50%{opacity:.85;transform:scale(1.5);}}
-
-/* Horizontal scan line */
-.scan{
-position:fixed;top:0;left:0;right:0;height:2px;
-background:linear-gradient(90deg,transparent,rgba(212,160,23,.35),transparent);
-animation:scanDown 8s linear infinite;pointer-events:none;z-index:1;
-}
-@keyframes scanDown{0%{top:-2px;}100%{top:100%}}
-
-/* ── CARD ── */
-.card{
-position:relative;z-index:10;
-width:min(680px, 92vw);
-background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.015));
-border:1px solid rgba(212,160,23,.22);
-border-radius:24px;
-overflow:hidden;
-box-shadow:0 48px 96px rgba(0,0,0,.65), 0 0 0 1px rgba(255,255,255,.04);
-animation:riseIn 1s cubic-bezier(.22,1,.36,1) both;
-}
-@keyframes riseIn{from{opacity:0;transform:translateY(36px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
-
-/* Gold top accent bar */
-.card-accent{
-height:4px;
-background:linear-gradient(90deg, var(–navy), var(–royal) 40%, var(–gold) 70%, var(–royal));
-background-size:200% 100%;
-animation:shimmerBar 4s linear infinite;
-}
-@keyframes shimmerBar{0%{background-position:0% 0%;}100%{background-position:200% 0%;}}
-
-.card-body{padding:44px 48px 40px;}
-
-/* ── HEADER ROW ── */
-.header-row{
-display:flex;align-items:center;justify-content:space-between;
-margin-bottom:32px;padding-bottom:24px;
-border-bottom:1px solid rgba(255,255,255,.07);
-}
-.logo-group{display:flex;align-items:center;gap:14px;}
-.egk-logo{height:46px;border-radius:8px;filter:brightness(1.05) drop-shadow(0 4px 12px rgba(0,0,0,.4));}
-.logo-text{}
-.logo-name{font-family:‘Playfair Display’,serif;font-size:.95rem;color:#fff;font-weight:700;letter-spacing:.3px;}
-.logo-div{font-size:.65rem;color:rgba(255,255,255,.4);letter-spacing:1.2px;text-transform:uppercase;margin-top:2px;}
-
-/* Government seal image */
-.seal-img{
-height:64px;
-filter:brightness(1.1) drop-shadow(0 4px 16px rgba(212,160,23,.3));
-animation:sealPulse 3s ease-in-out infinite;
-}
-@keyframes sealPulse{0%,100%{filter:brightness(1.1) drop-shadow(0 4px 16px rgba(212,160,23,.3));}50%{filter:brightness(1.2) drop-shadow(0 4px 24px rgba(212,160,23,.5));}}
-
-/* ── CLASSIFICATION BADGE ── */
-.classif-row{display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap;}
-.classif-badge{
-display:inline-flex;align-items:center;gap:6px;
-background:rgba(212,160,23,.1);border:1px solid rgba(212,160,23,.4);
-color:var(–gold);font-size:.65rem;font-weight:800;
-letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:4px;
-}
-.classif-ref{font-size:.65rem;color:rgba(255,255,255,.28);letter-spacing:1px;font-family:monospace;}
-
-/* ── MAIN HEADLINE ── */
-.notice-icon{font-size:2.6rem;margin-bottom:16px;display:block;
-animation:iconPop .8s cubic-bezier(.34,1.56,.64,1) .3s both;}
-@keyframes iconPop{from{opacity:0;transform:scale(.4);}to{opacity:1;transform:scale(1);}}
-
-.notice-title{
-font-family:‘Playfair Display’,serif;
-font-size:clamp(1.5rem,4vw,2.1rem);
-color:#fff;line-height:1.15;margin-bottom:10px;
-animation:fadeUp .7s ease .4s both;
-}
-.notice-title span{color:#7DD3FC;}
-
-.notice-sub{
-font-size:.9rem;color:rgba(255,255,255,.55);line-height:1.75;
-margin-bottom:28px;max-width:520px;
-animation:fadeUp .7s ease .5s both;
-}
-.notice-sub strong{color:rgba(255,255,255,.8);}
-@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
-
-/* ── NEW URL BOX ── */
-.url-box{
-background:rgba(16,66,176,.15);
-border:1px solid rgba(16,66,176,.4);
-border-left:4px solid var(–royal);
-border-radius:10px;padding:18px 22px;
-margin-bottom:28px;
-display:flex;align-items:center;gap:16px;
-animation:fadeUp .7s ease .6s both;
-}
-.url-icon{font-size:1.4rem;flex-shrink:0;}
-.url-label{font-size:.67rem;color:rgba(255,255,255,.35);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:4px;}
-.url-value{
-font-family:monospace;font-size:.95rem;color:#93C5FD;font-weight:700;
-word-break:break-all;letter-spacing:.3px;
+/* === HEADER === */
+header {
+display: flex; flex-direction: column; align-items: center;
+text-align: center; margin-bottom: 36px;
 }
 
-/* ── COUNTDOWN ── */
-.countdown-row{
-display:flex;align-items:center;gap:10px;margin-bottom:32px;
-animation:fadeUp .7s ease .65s both;
-}
-.countdown-bar-wrap{
-flex:1;height:6px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;
-}
-.countdown-bar{
-height:100%;background:linear-gradient(90deg,var(–royal),var(–gold));
-border-radius:3px;width:100%;
-animation:drainBar 12s linear forwards;
-}
-@keyframes drainBar{from{width:100%;}to{width:0%;}}
-.countdown-text{font-size:.72rem;color:rgba(255,255,255,.35);white-space:nowrap;letter-spacing:.5px;}
-#countdown-num{color:var(–gold);font-weight:700;}
-
-/* ── CTA BUTTON ── */
-.cta-btn{
-display:inline-flex;align-items:center;gap:10px;
-background:linear-gradient(135deg,var(–royal),#1565C0);
-color:#fff;font-size:.9rem;font-weight:700;
-padding:15px 36px;border-radius:10px;
-text-decoration:none;letter-spacing:.3px;
-border:1px solid rgba(255,255,255,.1);
-box-shadow:0 12px 32px rgba(16,66,176,.5);
-transition:all .25s;
-animation:fadeUp .7s ease .7s both;
-}
-.cta-btn:hover{
-background:linear-gradient(135deg,#1565C0,var(–royal));
-transform:translateY(-3px);
-box-shadow:0 20px 48px rgba(16,66,176,.6);
-}
-.cta-btn .arrow{
-display:inline-block;
-transition:transform .25s;
-}
-.cta-btn:hover .arrow{transform:translateX(5px);}
-
-/* ── DIVIDER ── */
-.card-divider{
-height:1px;
-background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent);
-margin:28px 0;
+.egk-logo {
+display: flex; align-items: center; gap: 14px;
+margin-bottom: 18px;
 }
 
-/* ── FOOTER ROW ── */
-.footer-row{
-display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
-animation:fadeUp .7s ease .8s both;
-}
-.footer-meta{font-size:.7rem;color:rgba(255,255,255,.22);letter-spacing:.6px;line-height:1.8;}
-.footer-meta strong{color:rgba(255,255,255,.38);}
-.security-pill{
-display:inline-flex;align-items:center;gap:5px;
-background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);
-color:#4ADE80;font-size:.62rem;font-weight:700;
-letter-spacing:1.2px;text-transform:uppercase;padding:4px 10px;border-radius:4px;
+.logo-hex {
+  width: 70px;
+  height: 70px;
 }
 
-/* ── CORNER WATERMARK ── */
-.watermark{
-position:fixed;bottom:24px;right:28px;z-index:5;
-font-size:.62rem;color:rgba(255,255,255,.1);
-letter-spacing:1.5px;text-transform:uppercase;font-family:monospace;
-writing-mode:vertical-rl;transform:rotate(180deg);
-pointer-events:none;
+.logo-hex img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* keeps aspect ratio */
+}
+.logo-text {
+font-family: ‘Orbitron’, monospace;
+font-weight: 900;
+}
+.logo-text .egk { font-size: 2.6rem; color: var(–glow); letter-spacing: 4px; text-shadow: 0 0 20px var(–glow), 0 0 60px rgba(57,255,20,0.3); }
+.logo-text .sub { font-size: 0.68rem; color: var(–water); letter-spacing: 2px; font-family: ‘Space Mono’, monospace; }
+
+h1 {
+font-family: ‘Orbitron’, monospace;
+font-size: clamp(1.3rem, 4vw, 2rem);
+font-weight: 900;
+color: #fff;
+line-height: 1.2;
+text-transform: uppercase;
+letter-spacing: 2px;
+text-shadow: 0 0 30px rgba(57,255,20,0.4);
+margin-bottom: 8px;
 }
 
-/* ── RESPONSIVE ── */
-@media(max-width:560px){
-.card-body{padding:30px 24px 28px;}
-.header-row{flex-direction:column;align-items:flex-start;gap:16px;}
-.footer-row{flex-direction:column;align-items:flex-start;}
+.tagline {
+font-size: 1rem;
+color: var(–water);
+letter-spacing: 3px;
+font-family: ‘Space Mono’, monospace;
+font-size: 0.75rem;
 }
+
+.divider {
+width: 100%; height: 1px;
+background: linear-gradient(90deg, transparent, var(–glow), var(–water), var(–glow), transparent);
+margin: 24px 0;
+box-shadow: 0 0 8px var(–glow);
+}
+
+/* === CLIMATE BADGE === */
+.climate-badge {
+display: inline-flex; align-items: center; gap: 8px;
+background: rgba(0,188,212,0.12);
+border: 1px solid var(–water);
+border-radius: 30px;
+padding: 6px 18px;
+font-size: 0.78rem;
+letter-spacing: 2px;
+color: var(–water);
+font-family: ‘Space Mono’, monospace;
+margin-bottom: 28px;
+box-shadow: 0 0 12px rgba(0,188,212,0.2);
+}
+.climate-badge span { font-size: 1.1rem; }
+
+/* === SYSTEM OVERVIEW === */
+.overview-grid {
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+gap: 3px;
+margin-bottom: 28px;
+border: 1px solid rgba(57,255,20,0.2);
+border-radius: 8px;
+overflow: hidden;
+}
+
+.stat-cell {
+background: rgba(10,30,10,0.7);
+padding: 16px 12px;
+text-align: center;
+border-right: 1px solid rgba(57,255,20,0.15);
+transition: background 0.3s;
+}
+.stat-cell:last-child { border-right: none; }
+.stat-cell:hover { background: rgba(57,255,20,0.07); }
+
+.stat-num {
+font-family: ‘Orbitron’, monospace;
+font-size: 1.8rem;
+font-weight: 900;
+color: var(–glow);
+text-shadow: 0 0 15px var(–glow);
+line-height: 1;
+}
+.stat-label {
+font-size: 0.68rem;
+color: #6fbc6f;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+margin-top: 4px;
+}
+
+/* === SECTION TITLE === */
+.sec-title {
+font-family: ‘Orbitron’, monospace;
+font-size: 0.7rem;
+letter-spacing: 4px;
+color: var(–glow);
+text-transform: uppercase;
+margin-bottom: 16px;
+display: flex; align-items: center; gap: 10px;
+}
+.sec-title::after { content: ‘’; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(57,255,20,0.4), transparent); }
+
+/* === MAIN SYSTEM DIAGRAM === */
+.system-diagram {
+position: relative;
+background: rgba(5,20,5,0.9);
+border: 1px solid rgba(57,255,20,0.25);
+border-radius: 12px;
+padding: 24px;
+margin-bottom: 24px;
+overflow: hidden;
+}
+
+.system-diagram::before {
+content: ‘’;
+position: absolute; inset: 0;
+background: radial-gradient(ellipse at 50% 50%, rgba(45,122,45,0.06) 0%, transparent 70%);
+}
+
+.diagram-svg-wrap {
+width: 100%;
+max-width: 900px;
+margin: 0 auto;
+display: block;
+}
+
+/* === TECH CARDS GRID === */
+.tech-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 16px;
+margin-bottom: 24px;
+}
+
+.tech-card {
+background: var(–panel);
+border: 1px solid rgba(57,255,20,0.18);
+border-radius: 10px;
+padding: 20px;
+position: relative;
+overflow: hidden;
+transition: transform 0.3s, box-shadow 0.3s;
+}
+.tech-card:hover {
+transform: translateY(-3px);
+box-shadow: 0 8px 32px rgba(57,255,20,0.15);
+border-color: rgba(57,255,20,0.5);
+}
+
+.tech-card::before {
+content: ‘’;
+position: absolute; top: 0; left: 0; right: 0; height: 2px;
+background: linear-gradient(90deg, var(–leaf), var(–water));
+}
+
+.card-num {
+position: absolute; top: 14px; right: 16px;
+font-family: ‘Orbitron’, monospace;
+font-size: 2.2rem;
+font-weight: 900;
+color: rgba(57,255,20,0.08);
+line-height: 1;
+}
+
+.card-icon {
+font-size: 2rem; margin-bottom: 10px; display: block;
+filter: drop-shadow(0 0 8px rgba(57,255,20,0.4));
+}
+
+.card-title {
+font-family: ‘Orbitron’, monospace;
+font-size: 0.8rem;
+font-weight: 700;
+color: var(–glow);
+letter-spacing: 1px;
+margin-bottom: 6px;
+text-transform: uppercase;
+}
+
+.card-body {
+font-size: 0.88rem;
+color: #a0d0a0;
+line-height: 1.55;
+margin-bottom: 12px;
+}
+
+.card-spec {
+display: flex; flex-wrap: wrap; gap: 6px;
+}
+.spec-tag {
+background: rgba(57,255,20,0.08);
+border: 1px solid rgba(57,255,20,0.2);
+border-radius: 4px;
+padding: 2px 8px;
+font-size: 0.68rem;
+color: var(–lime);
+font-family: ‘Space Mono’, monospace;
+letter-spacing: 0.5px;
+}
+
+.water-tag { background: rgba(0,188,212,0.1); border-color: rgba(0,188,212,0.3); color: var(–water); }
+.gold-tag { background: rgba(255,214,0,0.1); border-color: rgba(255,214,0,0.3); color: var(–gold); }
+.red-tag { background: rgba(229,57,53,0.1); border-color: rgba(229,57,53,0.3); color: #ef9a9a; }
+
+/* === EFFICIENCY BAR === */
+.eff-section {
+background: var(–panel);
+border: 1px solid rgba(57,255,20,0.18);
+border-radius: 10px;
+padding: 20px;
+margin-bottom: 24px;
+}
+
+.eff-row {
+display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
+}
+.eff-row:last-child { margin-bottom: 0; }
+
+.eff-label {
+font-size: 0.78rem;
+color: #a0d0a0;
+width: 160px;
+flex-shrink: 0;
+font-family: ‘Space Mono’, monospace;
+font-size: 0.65rem;
+}
+
+.eff-bar-bg {
+flex: 1; height: 10px;
+background: rgba(57,255,20,0.06);
+border-radius: 5px;
+overflow: hidden;
+border: 1px solid rgba(57,255,20,0.12);
+}
+
+.eff-bar {
+height: 100%; border-radius: 5px;
+background: linear-gradient(90deg, var(–leaf), var(–glow));
+box-shadow: 0 0 8px var(–glow);
+animation: growBar 1.5s cubic-bezier(.4,0,.2,1) both;
+}
+@keyframes growBar { from { width: 0 !important; } }
+
+.eff-val {
+font-family: ‘Orbitron’, monospace;
+font-size: 0.75rem;
+color: var(–glow);
+width: 48px;
+text-align: right;
+}
+
+/* === PIPELINE FLOW === */
+.pipeline {
+display: flex; align-items: stretch;
+gap: 0; margin-bottom: 24px;
+border: 1px solid rgba(57,255,20,0.2);
+border-radius: 10px;
+overflow: hidden;
+}
+
+.pipe-step {
+flex: 1; padding: 16px 12px;
+background: rgba(5,20,5,0.8);
+text-align: center;
+border-right: 1px solid rgba(57,255,20,0.12);
+position: relative;
+transition: background 0.3s;
+}
+.pipe-step:last-child { border-right: none; }
+.pipe-step:hover { background: rgba(57,255,20,0.05); }
+
+.pipe-step::after {
+content: ‘▶’;
+position: absolute; right: -9px; top: 50%; transform: translateY(-50%);
+color: var(–glow); font-size: 0.75rem; z-index: 3;
+}
+.pipe-step:last-child::after { display: none; }
+
+.pipe-icon { font-size: 1.6rem; display: block; margin-bottom: 6px; }
+.pipe-label { font-size: 0.68rem; color: var(–water); letter-spacing: 1px; font-family: ‘Space Mono’, monospace; }
+.pipe-sub { font-size: 0.72rem; color: #6fbc6f; margin-top: 3px; }
+
+/* === FOOTER === */
+footer {
+text-align: center; padding-top: 20px;
+border-top: 1px solid rgba(57,255,20,0.12);
+}
+.footer-logo {
+font-family: ‘Orbitron’, monospace;
+font-size: 0.7rem; letter-spacing: 4px;
+color: rgba(57,255,20,0.4);
+margin-bottom: 4px;
+}
+.footer-copy {
+font-size: 0.65rem; color: #3a6a3a;
+font-family: ‘Space Mono’, monospace;
+letter-spacing: 1px;
+}
+
+/* pulse animation on glow elements */
+@keyframes glow-pulse {
+0%, 100% { text-shadow: 0 0 20px var(–glow), 0 0 60px rgba(57,255,20,0.3); }
+50% { text-shadow: 0 0 30px var(–glow), 0 0 100px rgba(57,255,20,0.5); }
+}
+.logo-text .egk { animation: glow-pulse 3s ease-in-out infinite; }
+
+/* waterfall anim on diagram paths */
+@keyframes flow { to { stroke-dashoffset: -20; } }
 </style>
 
 </head>
 <body>
 
-<!-- Stars -->
+<!-- Animated rain -->
 
-<div class="stars" id="stars"></div>
-<div class="scan"></div>
+<div class="rain" id="rain"></div>
+<div class="bg-layer"></div>
 
-<!-- ── MAIN CARD ── -->
+<div class="wrapper">
 
-<div class="card">
-  <div class="card-accent"></div>
-  <div class="card-body">
+  <!-- HEADER -->
 
-```
-<!-- Header -->
-<div class="header-row">
-  <div class="logo-group">
-    <img class="egk-logo"
-      src="https://egkhor.com.my/home/wp-content/uploads/2026/02/cropped-IMG_7598.png"
-      alt="EGK Logo">
+<header>
+  <div class="egk-logo">
+    <div class="logo-hex">
+      <img src="https://egkhor.com.my/home/wp-content/uploads/2026/02/cropped-IMG_7598.png" alt="EGK Logo">
+    </div>
     <div class="logo-text">
-      <div class="logo-name">EGK Microelectronic Solutions Group</div>
-      <div class="logo-div">EduTech Division · Portal Rasmi EGK x KPM 2026</div>
+      <div class="egk">EGK</div>
+      <div class="sub">MICROELECTRONIC SOLUTIONS GROUP</div>
     </div>
   </div>
-  <img class="seal-img"
-    src="https://egkhor.com.my/home/wp-content/uploads/2026/04/IMG_1094-2.png"
-    alt="EGK Sulit Bersama Kerajaan">
-</div>
 
-<!-- Classification -->
-<div class="classif-row">
-  <div class="classif-badge">🔐 Sulit · Rasmi</div>
-  <div class="classif-badge" style="background:rgba(16,66,176,.12);border-color:rgba(16,66,176,.4);color:#93C5FD;">📋 Notis Pemindahan</div>
-  <span class="classif-ref">Ruj: EGK/KPM/PORTAL/2026 · April 2026</span>
-</div>
+```
+<h1>Natural AI Cooling System</h1>
+<div class="tagline">// ZERO AC · ZERO EMISSION · FULL PERFORMANCE //</div>
+<div class="divider"></div>
+<div class="climate-badge"><span>🌴</span> OPTIMISED FOR MALAYSIA — TROPICAL ZONE 1°N · RH 70–95% · 26–34°C</div>
+```
 
-<!-- Headline -->
-<span class="notice-icon">🏛️</span>
-<h1 class="notice-title">
-  Portal Ini Telah<br><span>Dipindahkan</span>
-</h1>
-<p class="notice-sub">
-  Bagi memastikan <strong>keselamatan data</strong> dan perlindungan dokumen sulit
-  EGK × KPM yang lebih kukuh, portal rasmi pembentangan ini telah dipindahkan
-  sepenuhnya ke pelayan EGK yang selamat.
-  Sila kemaskini penanda halaman anda.
-</p>
+  </header>
 
-<!-- New URL -->
-<div class="url-box">
-  <span class="url-icon">🔗</span>
-  <div>
-    <div class="url-label">Alamat Baharu Rasmi</div>
-    <div class="url-value">https://egkhor.com.my/gov/kpm</div>
+  <!-- STATS ROW -->
+
+  <div class="overview-grid">
+    <div class="stat-cell">
+      <div class="stat-num">0</div>
+      <div class="stat-label">AC Units Required</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">72%</div>
+      <div class="stat-label">Energy Reduction</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">PUE 1.1</div>
+      <div class="stat-label">Power Usage Effectiveness</div>
+    </div>
   </div>
-</div>
 
-<!-- Countdown -->
-<div class="countdown-row">
-  <div class="countdown-bar-wrap">
-    <div class="countdown-bar"></div>
-  </div>
-  <span class="countdown-text">Ubah hala dalam <span id="countdown-num">12</span>s</span>
-</div>
+  <!-- SYSTEM DIAGRAM -->
 
-<!-- CTA -->
-<a href="https://egkhor.com.my/gov/kpm" class="cta-btn">
-  Pergi ke Portal Baharu Sekarang <span class="arrow">→</span>
-</a>
+  <div class="system-diagram">
+    <div class="sec-title">// INTEGRATED SYSTEM ARCHITECTURE</div>
+    <div class="diagram-svg-wrap">
+      <svg viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg" font-family="Rajdhani, sans-serif">
+        <defs>
+          <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#1a4a1a"/>
+            <stop offset="100%" style="stop-color:#0a1a0a"/>
+          </linearGradient>
+          <linearGradient id="waterGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#006064"/>
+            <stop offset="100%" style="stop-color:#004d40"/>
+          </linearGradient>
+          <linearGradient id="earthGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#2d4a1a"/>
+            <stop offset="100%" style="stop-color:#1a2a0a"/>
+          </linearGradient>
+          <filter id="glow2">
+            <feGaussianBlur stdDeviation="3" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <marker id="arrowG" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#39ff14"/>
+          </marker>
+          <marker id="arrowB" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#00bcd4"/>
+          </marker>
+          <!-- Flowing dash pattern -->
+          <style>
+            .flow-g { stroke-dasharray: 8 4; animation: flow 1s linear infinite; }
+            .flow-b { stroke-dasharray: 8 4; animation: flow 1.2s linear infinite; }
+          </style>
+        </defs>
 
-<div class="card-divider"></div>
+```
+    <!-- Background zones -->
+    <rect x="0" y="0" width="900" height="180" fill="url(#skyGrad)" rx="8"/>
+    <rect x="0" y="340" width="900" height="180" fill="url(#earthGrad)" rx="8"/>
+    <rect x="0" y="180" width="900" height="160" fill="rgba(0,40,40,0.6)"/>
 
-<!-- Footer -->
-<div class="footer-row">
-  <div class="footer-meta">
-    <strong>EGK Microelectronic Solutions Group Sdn. Bhd.</strong><br>
-    No. Pendaftaran: 202501002992 (1604405-X)<br>
-    8, Lintang Beringin 8, Diamond Valley, 11960 Batu Maung, Penang
-  </div>
-  <div class="security-pill">🛡 Pelayan Selamat EGK</div>
+    <!-- Zone labels -->
+    <text x="18" y="22" fill="#39ff14" font-size="9" font-family="'Space Mono', monospace" letter-spacing="2" opacity="0.7">ROOF / CANOPY LAYER</text>
+    <text x="18" y="202" fill="#00bcd4" font-size="9" font-family="'Space Mono', monospace" letter-spacing="2" opacity="0.7">SERVER ROOM / COOLING CORE</text>
+    <text x="18" y="362" fill="#8bc34a" font-size="9" font-family="'Space Mono', monospace" letter-spacing="2" opacity="0.7">GROUND / GEOTHERMAL LAYER</text>
+
+    <!-- ======= ROOF LAYER ======= -->
+
+    <!-- Green Roof -->
+    <rect x="40" y="30" width="110" height="65" rx="6" fill="rgba(45,100,20,0.6)" stroke="#4caf50" stroke-width="1.5"/>
+    <text x="95" y="55" text-anchor="middle" fill="#8bc34a" font-size="11" font-weight="700">🌿 GREEN ROOF</text>
+    <text x="95" y="72" text-anchor="middle" fill="#6fbc6f" font-size="8.5">Living plants +</text>
+    <text x="95" y="84" text-anchor="middle" fill="#6fbc6f" font-size="8.5">Soil insulation</text>
+
+    <!-- Rainwater Harvesting -->
+    <rect x="200" y="30" width="120" height="65" rx="6" fill="rgba(0,90,120,0.5)" stroke="#00bcd4" stroke-width="1.5"/>
+    <text x="260" y="55" text-anchor="middle" fill="#00bcd4" font-size="11" font-weight="700">🌧 RAIN HARVEST</text>
+    <text x="260" y="72" text-anchor="middle" fill="#80deea" font-size="8.5">3,000 L/day capture</text>
+    <text x="260" y="84" text-anchor="middle" fill="#80deea" font-size="8.5">28°C avg temp</text>
+
+    <!-- Solar Chimney -->
+    <rect x="370" y="20" width="110" height="80" rx="6" fill="rgba(120,80,0,0.4)" stroke="#ffd600" stroke-width="1.5"/>
+    <text x="425" y="47" text-anchor="middle" fill="#ffd600" font-size="11" font-weight="700">☀ SOLAR</text>
+    <text x="425" y="62" text-anchor="middle" fill="#ffd600" font-size="11" font-weight="700">CHIMNEY</text>
+    <text x="425" y="78" text-anchor="middle" fill="#ffe082" font-size="8.5">Stack effect</text>
+    <text x="425" y="90" text-anchor="middle" fill="#ffe082" font-size="8.5">draft 2–4 m/s</text>
+
+    <!-- Wind Catcher -->
+    <rect x="530" y="30" width="110" height="65" rx="6" fill="rgba(30,60,100,0.5)" stroke="#29b6f6" stroke-width="1.5"/>
+    <text x="585" y="55" text-anchor="middle" fill="#29b6f6" font-size="11" font-weight="700">💨 WIND</text>
+    <text x="585" y="70" text-anchor="middle" fill="#29b6f6" font-size="11" font-weight="700">CATCHER</text>
+    <text x="585" y="84" text-anchor="middle" fill="#81d4fa" font-size="8.5">Bidirectional · Passive</text>
+
+    <!-- Evaporative Cooling Tower -->
+    <rect x="700" y="30" width="160" height="65" rx="6" fill="rgba(0,70,90,0.5)" stroke="#4dd0e1" stroke-width="1.5"/>
+    <text x="780" y="55" text-anchor="middle" fill="#4dd0e1" font-size="11" font-weight="700">🏔 EVAPORATIVE</text>
+    <text x="780" y="70" text-anchor="middle" fill="#4dd0e1" font-size="11" font-weight="700">COOLING TOWER</text>
+    <text x="780" y="84" text-anchor="middle" fill="#b2ebf2" font-size="8.5">ΔT −8°C · Natural draft</text>
+
+    <!-- ======= SERVER ROOM ======= -->
+
+    <!-- AI Server Block -->
+    <rect x="330" y="195" width="240" height="125" rx="8" fill="rgba(10,30,10,0.95)" stroke="#39ff14" stroke-width="2" filter="url(#glow2)"/>
+    <!-- Server rack details -->
+    <rect x="345" y="210" width="210" height="10" rx="2" fill="rgba(57,255,20,0.12)" stroke="rgba(57,255,20,0.3)" stroke-width="0.5"/>
+    <rect x="345" y="225" width="210" height="10" rx="2" fill="rgba(57,255,20,0.12)" stroke="rgba(57,255,20,0.3)" stroke-width="0.5"/>
+    <rect x="345" y="240" width="210" height="10" rx="2" fill="rgba(57,255,20,0.12)" stroke="rgba(57,255,20,0.3)" stroke-width="0.5"/>
+    <rect x="345" y="255" width="210" height="10" rx="2" fill="rgba(57,255,20,0.12)" stroke="rgba(57,255,20,0.3)" stroke-width="0.5"/>
+    <!-- Blinking LEDs -->
+    <circle cx="362" cy="215" r="3" fill="#39ff14" opacity="0.9"><animate attributeName="opacity" values="0.9;0.2;0.9" dur="1.1s" repeatCount="indefinite"/></circle>
+    <circle cx="362" cy="230" r="3" fill="#00bcd4" opacity="0.9"><animate attributeName="opacity" values="0.9;0.2;0.9" dur="0.8s" repeatCount="indefinite"/></circle>
+    <circle cx="362" cy="245" r="3" fill="#39ff14" opacity="0.9"><animate attributeName="opacity" values="0.9;0.1;0.9" dur="1.4s" repeatCount="indefinite"/></circle>
+    <circle cx="362" cy="260" r="3" fill="#ffd600" opacity="0.9"><animate attributeName="opacity" values="0.9;0.3;0.9" dur="0.6s" repeatCount="indefinite"/></circle>
+    <!-- AI Label -->
+    <text x="450" y="290" text-anchor="middle" fill="#39ff14" font-size="13" font-weight="700" font-family="'Orbitron', monospace">AI SERVER CORE</text>
+    <text x="450" y="307" text-anchor="middle" fill="#6fbc6f" font-size="9">GPU CLUSTER · 28–30°C TARGET</text>
+
+    <!-- Immersion Tank -->
+    <rect x="50" y="195" width="140" height="125" rx="8" fill="url(#waterGrad)" stroke="#00bcd4" stroke-width="1.5"/>
+    <text x="120" y="225" text-anchor="middle" fill="#00bcd4" font-size="11" font-weight="700">⚗ DIELECTRIC</text>
+    <text x="120" y="240" text-anchor="middle" fill="#00bcd4" font-size="11" font-weight="700">IMMERSION</text>
+    <text x="120" y="260" text-anchor="middle" fill="#80deea" font-size="8.5">Mineral oil / bio-fluid</text>
+    <text x="120" y="274" text-anchor="middle" fill="#80deea" font-size="8.5">Chip-direct cooling</text>
+    <text x="120" y="290" text-anchor="middle" fill="#4dd0e1" font-size="10" font-weight="700">ΔT up to −20°C</text>
+
+    <!-- Bamboo/Wet Wall -->
+    <rect x="710" y="195" width="150" height="125" rx="8" fill="rgba(20,60,20,0.7)" stroke="#8bc34a" stroke-width="1.5"/>
+    <text x="785" y="225" text-anchor="middle" fill="#8bc34a" font-size="11" font-weight="700">🎋 WET WALL</text>
+    <text x="785" y="242" text-anchor="middle" fill="#8bc34a" font-size="11" font-weight="700">EVAPORATOR</text>
+    <text x="785" y="262" text-anchor="middle" fill="#a5d6a7" font-size="8.5">Bamboo fibre media</text>
+    <text x="785" y="276" text-anchor="middle" fill="#a5d6a7" font-size="8.5">Trickle water film</text>
+    <text x="785" y="292" text-anchor="middle" fill="#4caf50" font-size="10" font-weight="700">RH boost · −6°C</text>
+
+    <!-- ======= GROUND LAYER ======= -->
+
+    <!-- Geothermal loops -->
+    <rect x="100" y="365" width="160" height="80" rx="6" fill="rgba(30,60,10,0.7)" stroke="#66bb6a" stroke-width="1.5"/>
+    <text x="180" y="395" text-anchor="middle" fill="#66bb6a" font-size="11" font-weight="700">🌍 GEOTHERMAL</text>
+    <text x="180" y="412" text-anchor="middle" fill="#66bb6a" font-size="11" font-weight="700">EARTH PIPES</text>
+    <text x="180" y="428" text-anchor="middle" fill="#a5d6a7" font-size="8.5">5m depth · 22–24°C stable</text>
+    <text x="180" y="440" text-anchor="middle" fill="#a5d6a7" font-size="8.5">Closed PEX loop</text>
+
+    <!-- Grey Water Recycle -->
+    <rect x="370" y="365" width="160" height="80" rx="6" fill="rgba(0,60,70,0.7)" stroke="#26c6da" stroke-width="1.5"/>
+    <text x="450" y="395" text-anchor="middle" fill="#26c6da" font-size="11" font-weight="700">♻ GREYWATER</text>
+    <text x="450" y="412" text-anchor="middle" fill="#26c6da" font-size="11" font-weight="700">RECYCLE TANK</text>
+    <text x="450" y="428" text-anchor="middle" fill="#80deea" font-size="8.5">Filter → reuse in</text>
+    <text x="450" y="440" text-anchor="middle" fill="#80deea" font-size="8.5">wet walls + towers</text>
+
+    <!-- Phase Change Storage -->
+    <rect x="640" y="365" width="160" height="80" rx="6" fill="rgba(60,30,0,0.6)" stroke="#ffa726" stroke-width="1.5"/>
+    <text x="720" y="395" text-anchor="middle" fill="#ffa726" font-size="11" font-weight="700">🧊 PHASE CHANGE</text>
+    <text x="720" y="412" text-anchor="middle" fill="#ffa726" font-size="11" font-weight="700">THERMAL STORE</text>
+    <text x="720" y="428" text-anchor="middle" fill="#ffcc80" font-size="8.5">PCM slabs · night pre-cool</text>
+    <text x="720" y="440" text-anchor="middle" fill="#ffcc80" font-size="8.5">Peak shaving 12–14 hrs</text>
+
+    <!-- ======= FLOW ARROWS ======= -->
+
+    <!-- Rain → Immersion tank (blue flow) -->
+    <path d="M260,95 L260,145 L120,145 L120,195" stroke="#00bcd4" stroke-width="1.5" fill="none" marker-end="url(#arrowB)" class="flow-b" opacity="0.8"/>
+
+    <!-- Solar chimney draft up (gold) -->
+    <path d="M425,20 L425,5" stroke="#ffd600" stroke-width="2" fill="none" marker-end="url(#arrowG)" opacity="0.7"/>
+    <!-- chimney pull from server room -->
+    <path d="M425,195 L425,100" stroke="#ffd600" stroke-width="1.5" fill="none" marker-end="url(#arrowG)" class="flow-g" opacity="0.7"/>
+
+    <!-- Wind → Wet wall -->
+    <path d="M640,63 L710,63 L710,200" stroke="#29b6f6" stroke-width="1.5" fill="none" marker-end="url(#arrowB)" class="flow-b" opacity="0.7"/>
+
+    <!-- Evap tower → server cool air -->
+    <path d="M700,80 L650,80 L650,220 L570,220" stroke="#4dd0e1" stroke-width="1.5" fill="none" marker-end="url(#arrowB)" class="flow-b" opacity="0.8"/>
+
+    <!-- Immersion → Geothermal loop -->
+    <path d="M120,320 L120,365" stroke="#39ff14" stroke-width="1.5" fill="none" marker-end="url(#arrowG)" class="flow-g" opacity="0.8"/>
+
+    <!-- Geothermal → Immersion (return) -->
+    <path d="M180,365 L180,340 L170,340 L170,320" stroke="#66bb6a" stroke-width="1.5" fill="none" marker-end="url(#arrowG)" stroke-dasharray="4 3" opacity="0.6"/>
+
+    <!-- Server → Greywater -->
+    <path d="M450,320 L450,365" stroke="#39ff14" stroke-width="1.5" fill="none" marker-end="url(#arrowG)" class="flow-g" opacity="0.8"/>
+
+    <!-- Greywater → Wet wall via pipe -->
+    <path d="M530,405 L640,405" stroke="#26c6da" stroke-width="1.5" fill="none" marker-end="url(#arrowB)" class="flow-b" opacity="0.7"/>
+
+    <!-- PCM → Server (night cool) -->
+    <path d="M720,365 L720,335 L590,335 L590,320" stroke="#ffa726" stroke-width="1.5" fill="none" marker-end="url(#arrowG)" stroke-dasharray="6 3" opacity="0.7"/>
+
+    <!-- Green Roof → ambient cooling arrows -->
+    <path d="M95,95 L95,145 L330,145 L330,195" stroke="#4caf50" stroke-width="1.5" fill="none" marker-end="url(#arrowG)" class="flow-g" opacity="0.7"/>
+
+    <!-- Wind Catcher air → server -->
+    <path d="M530,63 L450,63 L450,100 L450,195" stroke="#29b6f6" stroke-width="1" fill="none" stroke-dasharray="5 3" opacity="0.5"/>
+
+    <!-- Temp readout -->
+    <rect x="368" y="155" width="164" height="36" rx="4" fill="rgba(0,0,0,0.7)" stroke="rgba(57,255,20,0.4)" stroke-width="1"/>
+    <text x="450" y="170" text-anchor="middle" fill="#39ff14" font-size="8.5" font-family="'Space Mono', monospace">INLET: 28–30°C → TARGET: 24°C</text>
+    <text x="450" y="184" text-anchor="middle" fill="#4dd0e1" font-size="8.5" font-family="'Space Mono', monospace">Malaysia AMBIENT OPTIMISED ✓</text>
+
+  </svg>
 </div>
 ```
 
   </div>
+
+  <!-- COOLING PIPELINE FLOW -->
+
+  <div class="sec-title">// HEAT REMOVAL PIPELINE</div>
+  <div class="pipeline" style="margin-bottom:24px;">
+    <div class="pipe-step">
+      <span class="pipe-icon">🌧</span>
+      <div class="pipe-label">HARVEST</div>
+      <div class="pipe-sub">Rainwater 28°C</div>
+    </div>
+    <div class="pipe-step">
+      <span class="pipe-icon">⚗</span>
+      <div class="pipe-label">IMMERSE</div>
+      <div class="pipe-sub">Dielectric bath</div>
+    </div>
+    <div class="pipe-step">
+      <span class="pipe-icon">🌍</span>
+      <div class="pipe-label">SINK</div>
+      <div class="pipe-sub">Geo-loop 22°C</div>
+    </div>
+    <div class="pipe-step">
+      <span class="pipe-icon">🎋</span>
+      <div class="pipe-label">EVAPORATE</div>
+      <div class="pipe-sub">Wet wall film</div>
+    </div>
+    <div class="pipe-step">
+      <span class="pipe-icon">☀</span>
+      <div class="pipe-label">EXHAUST</div>
+      <div class="pipe-sub">Solar chimney draft</div>
+    </div>
+    <div class="pipe-step">
+      <span class="pipe-icon">♻</span>
+      <div class="pipe-label">RECYCLE</div>
+      <div class="pipe-sub">Grey water loop</div>
+    </div>
+  </div>
+
+  <!-- TECH CARDS -->
+
+  <div class="sec-title">// SUBSYSTEM DEEP DIVE</div>
+  <div class="tech-grid">
+
+```
+<div class="tech-card">
+  <div class="card-num">01</div>
+  <span class="card-icon">🌧</span>
+  <div class="card-title">Rainwater Pre-Cooling Loop</div>
+  <div class="card-body">Malaysia receives 2,500–3,000 mm/year rainfall — essentially free cold water. Roof cisterns collect and pre-cool warm coolant to ~28°C before it enters server rooms, reducing the thermal load dramatically.</div>
+  <div class="card-spec">
+    <span class="spec-tag">3,000 L/day</span>
+    <span class="spec-tag water-tag">28°C inlet</span>
+    <span class="spec-tag">Sand filter</span>
+    <span class="spec-tag">Zero OPEX</span>
+  </div>
 </div>
 
-<!-- Corner watermark -->
+<div class="tech-card">
+  <div class="card-num">02</div>
+  <span class="card-icon">⚗</span>
+  <div class="card-title">Single-Phase Liquid Immersion</div>
+  <div class="card-body">GPU/TPU boards submerged directly in non-conductive dielectric mineral oil or plant-based bio-fluid. Heat transfers 1,000× more efficiently than air. Eliminates fans entirely. Server noise drops to near-zero.</div>
+  <div class="card-spec">
+    <span class="spec-tag water-tag">−20°C chip ΔT</span>
+    <span class="spec-tag">No fans</span>
+    <span class="spec-tag">Bio-fluid option</span>
+    <span class="spec-tag gold-tag">Dust-proof</span>
+  </div>
+</div>
 
-<div class="watermark">EGK/KPM/PORTAL/2026 · SULIT</div>
+<div class="tech-card">
+  <div class="card-num">03</div>
+  <span class="card-icon">🌍</span>
+  <div class="card-title">Shallow Geothermal Earth Pipes</div>
+  <div class="card-body">At 5m depth, Malaysian soil stays at a near-constant 22–24°C year-round regardless of surface heat. Closed PEX loops act as heat sinks, rejecting server heat directly to the earth without any compressors.</div>
+  <div class="card-spec">
+    <span class="spec-tag">5m depth</span>
+    <span class="spec-tag">22–24°C stable</span>
+    <span class="spec-tag water-tag">Closed PEX loop</span>
+    <span class="spec-tag">25yr lifespan</span>
+  </div>
+</div>
+
+<div class="tech-card">
+  <div class="card-num">04</div>
+  <span class="card-icon">☀</span>
+  <div class="card-title">Solar Chimney Stack Effect</div>
+  <div class="card-body">A glazed vertical shaft heated by Malaysia's intense solar irradiance (5.5 kWh/m²/day) creates powerful buoyancy-driven airflow. Pulls hot exhaust air upward at 2–4 m/s — a passive mechanical exhaust requiring zero electricity.</div>
+  <div class="card-spec">
+    <span class="spec-tag gold-tag">2–4 m/s draft</span>
+    <span class="spec-tag">5.5 kWh/m²/day</span>
+    <span class="spec-tag">Zero power</span>
+    <span class="spec-tag">24/7 operation</span>
+  </div>
+</div>
+
+<div class="tech-card">
+  <div class="card-num">05</div>
+  <span class="card-icon">🎋</span>
+  <div class="card-title">Bamboo Wet Wall Evaporative Core</div>
+  <div class="card-body">Locally-sourced bamboo fibre media saturated with reclaimed water. Air passing through loses 6–8°C via evaporation. Works in harmony with Malaysia's ventilation breezes. Bamboo grows back in 3–5 years — fully renewable.</div>
+  <div class="card-spec">
+    <span class="spec-tag">−6 to −8°C</span>
+    <span class="spec-tag">Local bamboo</span>
+    <span class="spec-tag">Renewable</span>
+    <span class="spec-tag water-tag">Greywater fed</span>
+  </div>
+</div>
+
+<div class="tech-card">
+  <div class="card-num">06</div>
+  <span class="card-icon">🧊</span>
+  <div class="card-title">Phase-Change Thermal Storage</div>
+  <div class="card-body">PCM (Phase Change Material) slabs — typically paraffin or bio-wax at 24–26°C melt point — absorb excess heat during daytime peak load and release it at night. Effectively acts as a thermal battery, enabling peak shaving over 12–14 hours with no electricity.</div>
+  <div class="card-spec">
+    <span class="spec-tag gold-tag">12–14 hr peak shift</span>
+    <span class="spec-tag">24–26°C melt</span>
+    <span class="spec-tag">Bio-wax option</span>
+    <span class="spec-tag">Modular slabs</span>
+  </div>
+</div>
+
+<div class="tech-card">
+  <div class="card-num">07</div>
+  <span class="card-icon">🌿</span>
+  <div class="card-title">Living Green Roof + Facade</div>
+  <div class="card-body">Sedum and tropical plant species on the roof provide 40–60% reduction in roof surface temperature through transpiration and insulation. A vertical garden facade blocks radiant wall heat gain — Malaysia's biggest hidden cooling cost.</div>
+  <div class="card-spec">
+    <span class="spec-tag">−40°C surface temp</span>
+    <span class="spec-tag">Sedum + tropical</span>
+    <span class="spec-tag">CO₂ sink</span>
+    <span class="spec-tag water-tag">Rainwater irrigated</span>
+  </div>
+</div>
+
+<div class="tech-card">
+  <div class="card-num">08</div>
+  <span class="card-icon">💨</span>
+  <div class="card-title">Bidirectional Wind Catchers</div>
+  <div class="card-body">Traditional Middle-Eastern Badgir design adapted for Malaysia's variable SW/NE monsoon winds. Rotating cowl channels prevailing breeze directly into the building, providing passive pre-cooling before air reaches server intake plenums.</div>
+  <div class="card-spec">
+    <span class="spec-tag">360° rotation</span>
+    <span class="spec-tag">SW + NE monsoon</span>
+    <span class="spec-tag">Passive 100%</span>
+    <span class="spec-tag gold-tag">Badgir design</span>
+  </div>
+</div>
+
+<div class="tech-card">
+  <div class="card-num">09</div>
+  <span class="card-icon">♻</span>
+  <div class="card-title">Closed-Loop Greywater Recycling</div>
+  <div class="card-body">Warm effluent water from immersion tanks and wet walls is filtered through biochar and UV treatment, then recirculated back to the evaporative walls and cooling tower. Water consumption drops by 85% versus open systems. Zero discharge.</div>
+  <div class="card-spec">
+    <span class="spec-tag water-tag">85% water saved</span>
+    <span class="spec-tag">Biochar filter</span>
+    <span class="spec-tag">UV sterilise</span>
+    <span class="spec-tag">Zero discharge</span>
+  </div>
+</div>
+```
+
+  </div>
+
+  <!-- EFFICIENCY BARS -->
+
+  <div class="eff-section">
+    <div class="sec-title">// PERFORMANCE METRICS vs CONVENTIONAL AC</div>
+    <div class="eff-row">
+      <div class="eff-label">ENERGY SAVING</div>
+      <div class="eff-bar-bg"><div class="eff-bar" style="width:72%; animation-delay:0.1s"></div></div>
+      <div class="eff-val">72%</div>
+    </div>
+    <div class="eff-row">
+      <div class="eff-label">CARBON REDUCTION</div>
+      <div class="eff-bar-bg"><div class="eff-bar" style="width:88%; animation-delay:0.2s"></div></div>
+      <div class="eff-val">88%</div>
+    </div>
+    <div class="eff-row">
+      <div class="eff-label">WATER EFFICIENCY</div>
+      <div class="eff-bar-bg"><div class="eff-bar" style="width:85%; animation-delay:0.3s"></div></div>
+      <div class="eff-val">85%</div>
+    </div>
+    <div class="eff-row">
+      <div class="eff-label">NOISE REDUCTION</div>
+      <div class="eff-bar-bg"><div class="eff-bar" style="width:95%; animation-delay:0.4s"></div></div>
+      <div class="eff-val">95%</div>
+    </div>
+    <div class="eff-row">
+      <div class="eff-label">RELIABILITY (MTBF)</div>
+      <div class="eff-bar-bg"><div class="eff-bar" style="width:90%; animation-delay:0.5s"></div></div>
+      <div class="eff-val">+90%</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+
+  <footer>
+    <div class="footer-logo">EGK MICROELECTRONIC SOLUTIONS GROUP SDN. BHD.</div>
+    <div class="footer-copy">egkhor.com.my · BUKIT MERTAJAM, PENANG, MALAYSIA · NATURAL COOLING INITIATIVE 2025</div>
+  </footer>
+
+</div>
 
 <script>
-/* ── Stars ── */
-const container = document.getElementById('stars');
-for(let i = 0; i < 140; i++){
-  const s = document.createElement('div');
-  s.className = 'star';
-  const sz = Math.random() * 2.2 + .4;
-  s.style.cssText = `
-    width:${sz}px;height:${sz}px;
-    left:${Math.random()*100}%;top:${Math.random()*100}%;
-    --d:${2 + Math.random()*5}s;
-    --dl:-${Math.random()*6}s;
-    opacity:${Math.random()*.5+.1};
-  `;
-  container.appendChild(s);
+// Generate animated rain drops
+const rain = document.getElementById('rain');
+for (let i = 0; i < 38; i++) {
+  const d = document.createElement('div');
+  d.className = 'drop';
+  const left = Math.random() * 100;
+  const dur = 1.5 + Math.random() * 2.5;
+  const delay = Math.random() * 4;
+  const h = 40 + Math.random() * 80;
+  d.style.cssText = `left:${left}%;height:${h}px;animation-duration:${dur}s;animation-delay:${delay}s;top:-100px;opacity:${0.2 + Math.random()*0.4}`;
+  rain.appendChild(d);
 }
-
-/* ── Countdown ── */
-let secs = 12;
-const el = document.getElementById('countdown-num');
-const timer = setInterval(() => {
-  secs--;
-  el.textContent = secs;
-  if(secs <= 0){
-    clearInterval(timer);
-    window.location.href = 'https://egkhor.com.my/gov/kpm';
-  }
-}, 1000);
 </script>
 
 </body>
