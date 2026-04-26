@@ -299,6 +299,42 @@ tr[data-status="critical"] .status {
   color: #e53935;
   text-shadow: 0 0 8px #e53935;
 }
+
+/* === ENGINEERING DISCLAIMER === */
+.eng-disclaimer {
+  margin-top: 28px;
+  padding: 18px 20px;
+  background: rgba(255, 214, 0, 0.05);
+  border: 1px solid rgba(255, 214, 0, 0.25);
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.eng-disclaimer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  box-shadow: 0 0 10px var(--gold);
+}
+
+.disc-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  color: var(--gold);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.disc-body {
+  font-size: 0.75rem;
+  color: #d0d0a0;
+  line-height: 1.6;
+  font-family: 'Space Mono', monospace;
+}
 </style>
 </head>
 <body>
@@ -957,9 +993,18 @@ tr[data-status="critical"] .status {
   </div>
 </div>
 
+<div class="eng-disclaimer">
+  <div class="disc-title">ENGINEERING DISCLAIMER</div>
+  <div class="disc-body">
+    This system represents a conceptual engineering architecture based on thermodynamic modeling and preliminary calculations.<br><br>
+    Performance figures are derived from theoretical analysis and require validation through simulation and physical prototyping.<br><br>
+    The design is currently in pre-deployment stage (TRL 2–3).
+  </div>
+</div>
+
 <footer>
   <div class="fl">EGK MICROELECTRONIC SOLUTIONS GROUP SDN. BHD.</div>
-  <div class="fc">egkhor.com.my · BUKIT MERTAJAM, PENANG · HYBRID PASSIVE COOLING — v5 OPERATIONAL ENGINEERING EDITION 2025</div>
+  <div class="fc">egkhor.com.my · PENANG · HYBRID PASSIVE COOLING — v5 OPERATIONAL ENGINEERING EDITION 2025</div>
 </footer>
 </div>
 
